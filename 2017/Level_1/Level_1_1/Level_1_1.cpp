@@ -1,5 +1,4 @@
-﻿// Level_1_1.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
-// https://www.acmicpc.net/problem/14696
+﻿// https://www.acmicpc.net/problem/14696
 
 using namespace std;
 
@@ -131,9 +130,6 @@ int main()
 			cout << "B" << "\n";
 		}
 	}
-
-
-
 	return 0;
 }
 
