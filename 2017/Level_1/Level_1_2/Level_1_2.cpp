@@ -24,8 +24,12 @@ int main()
         {
             for (int l = 0; l <= total_number_of_people / bed_type_C; l++)
             {
-                if (bed_type_A * i + bed_type_B * k + bed_type_C * l == total_number_of_people)
+                if (total_number_of_people == bed_type_A * i + bed_type_B * k + bed_type_C * l)
                 {
+                    // total_number_of_people = bed_type_A * i + bed_type_B * k + bed_type_C * 정수
+                  
+                    // (total_number_of_people - (bed_type_A * i + bed_type_B * k)) % bed_type_C == 0
+
                     cout << "1" << "\n";
                     is_break = 1;
                     break;
@@ -45,42 +49,6 @@ int main()
     {
         cout << "0" << "\n";
     }
-
-    /*
-    모두가 침대를 사용해야함.
-    (가능/불가능)구분을 어떻게 해야 할까?
-
-    ex.1) 5 9 12 113
-    1. 큰숫자를 먼저 사용한다.
-        12*9 + 9*0 + 5*1 = 113
-    ----------------------------
-    113 / 12 = 9 > 1
-    113 - 12 * 9 = 5
-    5 / 9  = 0.5... < 1
-      5 / 5 = 1
-
-    ex.2) 3 6 9 112
-    112 / 9 = 12
-    112 - 12 * 9 = 4
-    4 / 6 = 0.6... <1
-       4 / 3 = 1.3... > 1
-
-    ex.3) 2 7 9 217
-    217 / 9 = 24
-    217 - 9 * 24 = 1
-    217 - 9 * 23 = 10
-    10 - 2*5 = 0
-
-    */
-
+    
     return 0;
 }
-
-/*
-1. 방안에는 침대수를 기준으로 3가지 종류의 방이 있다.
-2. 방안의 침대를 모두 사용해 배정해야한다.
-
-    3가지 종류의 방을 입력받음
-    총인원수 입력받음
-    가능/불가능 표시
-*/
