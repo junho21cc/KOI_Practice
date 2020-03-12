@@ -7,11 +7,11 @@ int main()
 {
 	int number_of_student;
 	int pair_number;
-	int students_card_number[100000];
+	int students_card_number[100001];
 
 	int X, Y;
 	
-	int is_truth[100000];
+	int is_truth[100001];
 	int is_break = 0;
 	
 	//입력하기
@@ -34,11 +34,11 @@ int main()
 	for (int i = 1; i <= number_of_student; i++)
 	{
 		is_truth[students_card_number[i]]++;
+		
 	}
-
 	for (int i = 1; i <= number_of_student; i++)
 	{
-		if (is_truth[i] == 2)
+		if (is_truth[i] > 1)
 		{
 			cout << "-1";
 			is_break = 1;
