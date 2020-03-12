@@ -8,11 +8,11 @@ int main()
 	int number_of_student;
 	int pair_number;
 	int students_card_number[100000];
-	int back_up_card_number[100000];
 
 	int X, Y;
 	
-	int is_truth = 1;
+	int is_truth[100000];
+	int is_break = 0;
 	
 	//입력하기
 	cin >> number_of_student >> pair_number;
@@ -20,6 +20,7 @@ int main()
 	for (int i = 1; i <= number_of_student; i++)
 	{
 		students_card_number[i] = i;
+		is_truth[i] = 0;
 	}
 
 	for (int i = 0; i < pair_number; i++)
@@ -32,46 +33,26 @@ int main()
 
 	for (int i = 1; i <= number_of_student; i++)
 	{
-		back_up_card_number[i] = students_card_number[i];
-
-		for (int k = 1; k <= number_of_student; k++)
-		{			
-			if (i == students_card_number[k])
-			{
-				students_card_number[k] = 0;
-				break;
-			}
-		}
+		is_truth[students_card_number[i]]++;
 	}
 
 	for (int i = 1; i <= number_of_student; i++)
 	{
-		if (students_card_number[i] != 0)
+		if (is_truth[i] == 2)
 		{
-			cout << "-1" << "\n";
-			is_truth = 0;
+			cout << "-1";
+			is_break = 1;
 			break;
 		}
 	}
-	if (is_truth == 1)
+
+	if (is_break == 0)
 	{
 		for (int i = 1; i <= number_of_student; i++)
 		{
-			cout << back_up_card_number[i] << " ";
+			cout << students_card_number[i] << " ";
 		}
 	}
-
+	
 	return 0;
 }
-
-/*
- 방법.NO.1
-0	1	2	3	4	5--Y
-1	0					 	1;2
-2	1	0					2;0
-3	3	3	0				3;4
-4	4	4	3	0			4;3
-5	1	5	3	4	0		5;1
-l							3 1 5 4 2
-
-*/
