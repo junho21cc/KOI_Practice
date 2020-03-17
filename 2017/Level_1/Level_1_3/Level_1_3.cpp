@@ -12,12 +12,28 @@ int main()
 	
 	// 걸어서, 자전거
 	int money[100][2];
+
+	int efficiency[100][2];
+
+	cin >> n >> k;
 	   
 	for (int i = 0; i < n; i++)
 	{
-		cin >> time[i][0] >> money[i][0]
-			>> time[i][1] >> money[i][1];
+		for (int k = 0; k < 2; k++)
+		{
+			cin >> time[i][k] >> money[i][k];
+			efficiency[i][k] = money[i][k] / time[i][k];
+		}
 	}
+	
+	for (int i = 0; i < n; i++)
+	{
+		if (efficiency[i][0] > efficiency[i][1])
+		{
+
+		}
+	}
+
 
 	return 0;
 }
