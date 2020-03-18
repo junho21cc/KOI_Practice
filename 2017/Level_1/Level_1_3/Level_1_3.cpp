@@ -1,39 +1,62 @@
 ﻿#include <stdio.h>
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
+
+int dp[101][100001];
+
+void dfs(int i, int k, int a, int b, int c, int d)
+{
+	for (int j = 0; j <= k; j++)
+	{
+		if (dp[i - 1][j] == 0)
+		{
+			continue;
+		}
+		else
+		{
+			if (j + a <= k)
+			{
+				dp[i][j + a] = max(dp[i][j + a], dp[i - 1][j] + b);
+			}
+			if (j + c <= k)
+			{
+				dp[i][j + c] = max(dp[i][j + c], dp[i - 1][j] + d);
+			}
+		}
+	}
+}
 
 int main()
 {
 	int n, k;
-
-	// 걸어서, 자전거
-	int time[100][2];	
-	
-	// 걸어서, 자전거
-	int money[100][2];
-
-	int efficiency[100][2];
+	int a, b, c, d;
 
 	cin >> n >> k;
-	   
-	for (int i = 0; i < n; i++)
-	{
-		for (int k = 0; k < 2; k++)
-		{
-			cin >> time[i][k] >> money[i][k];
-			efficiency[i][k] = money[i][k] / time[i][k];
-		}
-	}
-	
-	for (int i = 0; i < n; i++)
-	{
-		if (efficiency[i][0] > efficiency[i][1])
-		{
 
+	for (int i = 1; i <= n; i++)
+	{
+		cin >> a >> b >> c >> d;
+		if (i == 1)
+		{
+			dp[i][a] = b;
+			dp[i][c] = max(dp[i][c], d);
+		}
+		else
+		{
+			dfs(i, k, a, b, c, d);
 		}
 	}
 
+	int m = -1;
+
+	for (int i = 1; i <= k; i++)
+	{
+		m = max(m, dp[n][i]);
+	}
+
+	cout << m;
 
 	return 0;
 }
@@ -50,5 +73,7 @@ int main()
 ----------------------------------------
 가장 효율적인 방법으로는 무엇이 있을까?
 1. 무작정 다 더하고 비교한다
--> 
+
+모든경우의수를 더하는것? -> 가장 효율적인 방법으로 진행
+-> 시간대비 돈을 수로 만들어서?
 */
