@@ -83,23 +83,30 @@ int main()
     int check_end_position = position[0][1];
 
    
-    for (int k = 1; k <= peak; k++)
+    for (int k = 1; k < peak; k++)
     {
-        if (check_start_position > position[k][0])
+        if (check_start_position < position[k][0])
         {
             included_other_peak++;
             check_start_position = position[k][0];
         }
+        if (check_end_position < position[k][0])
+        {
+            not_included_by_other_peak_number++;
+            check_end_position = position[k][1];
+        }
 
+        if (k == peak - 1)
+        {
+            if (check_end_position == position[0][1])
+            {
+                not_included_by_other_peak_number++;
+            }
+        }
     }
-  
 
+    cout << peak - included_other_peak << " " << included_other_peak;
 
-    for (int i = 0; i < peak; i++)
-    {
-        cout << position[i][0] << " " << position[i][1] << "\n";
-    }
-    
     return 0;
 }
 
