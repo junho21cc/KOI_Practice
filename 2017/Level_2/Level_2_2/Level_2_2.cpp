@@ -10,7 +10,7 @@ int main()
     int n;
     int x1, y1, x2, y2 = 0;
 
-    int not_included_by_other_peak_number = 0;
+    int not_included_by_other_peak = 0;
     int included_other_peak = 0;
 
     cin >> n;
@@ -82,27 +82,25 @@ int main()
     int check_start_position = position[0][0];
     int check_end_position = position[0][1];
 
-   
+    /*
+    봉우리의 개수를 세는 알고리즘
+
+    1. 수직선상의 가장 왼쪽에있는 x 좌표를 기준점으로 잡고, 그 x 좌표를 csp(check_start_position) 이라고 두고
+       그 봉우리의 다른 x좌표를 cep(check_end_position) 이라고 한다.
+
+    2. 전제 봉우리의 개수에서 csp와 cep 사이의 봉우리 개수를 뺀 수가 "다른 봉우리에 의해 포함되지 않는 봉우리"의 개수라고 한다.
+
+    3. csp와 cep의 사이에 봉우리의 개수 또한 위와같은 방법으로 센다.
+
+    4. 한 봉우리 안의 다른 봉우리들의 수를 셌으니까 다음 봉우리로 넘어간다.
+    */
+
     for (int k = 1; k < peak; k++)
     {
-        if (check_start_position < position[k][0])
+        if ((check_start_position < position[k][0]) && (check_end_position < position[k][1]))
         {
             included_other_peak++;
-            check_start_position = position[k][0];
-        }
-        if (check_end_position < position[k][0])
-        {
-            not_included_by_other_peak_number++;
-            check_end_position = position[k][1];
-        }
-
-        if (k == peak - 1)
-        {
-            if (check_end_position == position[0][1])
-            {
-                not_included_by_other_peak_number++;
-            }
-        }
+       }
     }
 
     cout << peak - included_other_peak << " " << included_other_peak;
