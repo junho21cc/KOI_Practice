@@ -10,8 +10,8 @@ int main()
     int n;
     int x1, y1, x2, y2 = 0;
 
-    int not_included_by_other_peak = 0;
-    int included_other_peak = 0;
+    int Answer_1 = 0;
+    int Answer_2 = 0;
 
     cin >> n;
     
@@ -79,19 +79,27 @@ int main()
         }
     }
 
-    int check_start_position = position[0][0];
-    int check_end_position = position[0][1];
-
-    for (int k = 1; k < peak; k++)
+    for (int k = 0; k < peak; k++)
     {
-        if ((check_start_position < position[k][0]) && (check_end_position < position[k][1]))
+        for (int j = 0; j < peak; j++)
         {
-            included_other_peak++;
-       }
+            if (j == k)
+            {
+                continue;
+            }
+            if (position[k][0] > position[j][0] && position[k][1] < position[j][1])
+            {
+                
+            }
+            else if(position[k][0] < position[j][0] && position[k][1] > position[j][1])
+            {
+                
+            }
+        }
     }
 
-    cout << peak - included_other_peak << " " << included_other_peak;
-
+    cout << Answer_1 << " " << Answer_2;
+    
     return 0;
 }
 
