@@ -1,4 +1,6 @@
-﻿#include <iostream>
+﻿// https://www.acmicpc.net/problem/14865
+
+#include <iostream>
 #include <algorithm>
 #include <stdio.h>
 
