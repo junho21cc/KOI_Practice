@@ -1,9 +1,14 @@
 ﻿#include <iostream>
+#include <algorithm>
 #include <stdio.h>
 
 using namespace std;
 
 int position[1000000][2];
+int my_compare(const void *a, const void *b)
+{
+    return *(int*)a < *(int*)b;
+}
 
 int main()
 {
@@ -32,12 +37,9 @@ int main()
             else
             {
                 position[peak][1] = x1;
-                if (position[peak][0] > position[peak][1])
-                {
-                    int change = position[peak][0];
-                    position[peak][0] = position[peak][1];
-                    position[peak][1] = change;
-                }
+                
+                sort(position[peak][0], position[peak][1]);
+                
                 start_end++;
             }
 
@@ -47,6 +49,7 @@ int main()
                 start_end = 0;
             }
         }
+
         y2 = y1;
 
         if (i == n - 1)
@@ -58,42 +61,45 @@ int main()
         }
     }
 
-    for (int i = 0; i <= peak; i++)
-    {
-        for (int k = 0; k <= peak; k++)
-        {
-            if (position[i][0] < position[k][0])
-            {
-                int change_x1;
-                int change_x2;
+    qsort(position, peak, sizeof(position[0]), my_compare);
 
-                change_x1 = position[i][0];
-                change_x2 = position[i][1];
-
-                position[i][0] = position[k][0];
-                position[i][1] = position[k][1];
-
-                position[k][0] = change_x1;
-                position[k][1] = change_x2;
-            }
-        }
-    }
 
     for (int k = 0; k < peak; k++)
-    {
+    { 
+        int a1 = 0, a2 = 0;
+
+        if (peak == 1)
+        {
+            Answer_1++;
+            Answer_2++;
+            break;
+        }
+        
         for (int j = 0; j < peak; j++)
         {
-            if (j == k)
+            if (k == j)
             {
                 continue;
             }
-            if (position[k][0] > position[j][0] && position[k][1] < position[j][1])
+
+            if ((position[k][0] >= position[j][0]) && (position[k][1] <= position[j][1]))
             {
-                
+                a1++;
             }
-            else if(position[k][0] < position[j][0] && position[k][1] > position[j][1])
+            else if((position[k][0] <= position[j][0]) && (position[k][1] >= position[j][1]))
             {
-                
+                a2++;
+            }
+
+            if (a2 >= 1)
+            {
+                Answer_1++;
+                break;
+            }
+            if (a1 >= 1)
+            {
+                Answer_2++;
+                break;
             }
         }
     }
